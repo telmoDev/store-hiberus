@@ -249,6 +249,17 @@ Password: client123
    - Agregar productos al carrito
    - Completar flujo de checkout
    - Verificar que funciona igual que cliente
+## 🔌 Pruebas de API (Postman)
+
+Se incluye un archivo de colección de Postman listo para usar en la raíz del proyecto: `store_api.postman_collection.json`.
+
+IMPORTANTE: Antes de usar la colección, asegúrate de crear un entorno en Postman con la variable `base_url` apuntando a `http://localhost:8000`, o utiliza las variables de colección predeterminadas.
+
+**Endpoints incluidos:**
+1.  **Auth**: Login (Admin y Client) -> Auto-guarda el token.
+2.  **Products**: Listar y Crear (Admin).
+3.  **Orders**: Crear y Obtener (Client).
+4.  **Payment**: Procesar pago de una orden.
 
 ### Casos de Prueba Específicos
 
