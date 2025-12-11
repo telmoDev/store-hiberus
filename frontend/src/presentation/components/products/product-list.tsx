@@ -11,15 +11,19 @@ export function ProductList() {
     const [search, setSearch] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const [sort, setSort] = useState<string>("");
+    const [page, setPage] = useState(1);
+    const limit = 12;
 
     const { data: products, isLoading, error } = useProducts({
         search: searchQuery,
         sort,
-        limit: 50,
+        page,
+        limit,
     });
 
     const handleSearch = () => {
         setSearchQuery(search);
+        setPage(1); // Reset page on new search
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -89,6 +93,29 @@ export function ProductList() {
                     <p className="text-muted-foreground">
                         No products found. Try adjusting your search.
                     </p>
+                </div>
+            )}
+
+            {/* Pagination Controls */}
+            {!isLoading && (products?.length ?? 0) > 0 && (
+                <div className="flex justify-center gap-4 mt-8">
+                    <Button
+                        variant="outline"
+                        onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                    >
+                        Previous
+                    </Button>
+                    <span className="flex items-center text-sm text-muted-foreground">
+                        Page {page}
+                    </span>
+                    <Button
+                        variant="outline"
+                        onClick={() => setPage((p) => p + 1)}
+                        disabled={products && products.length < limit}
+                    >
+                        Next
+                    </Button>
                 </div>
             )}
         </div>
