@@ -29,6 +29,9 @@ export function Header() {
                             <Link href="/" className="text-sm font-medium hover:underline">
                                 Productos
                             </Link>
+                            <Link href="/orders" className="text-sm font-medium hover:underline">
+                                Mis Pedidos
+                            </Link>
                             {user?.roles.includes("ROLE_ADMIN") && (
                                 <Link
                                     href="/admin/products/new"
