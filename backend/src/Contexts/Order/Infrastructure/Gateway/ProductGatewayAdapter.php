@@ -27,4 +27,16 @@ class ProductGatewayAdapter implements ProductGateway
             $product->getStock()
         );
     }
+
+    public function decreaseStock(string $id, int $quantity): void
+    {
+        $product = $this->productRepository->findById($id);
+        
+        if (!$product) {
+            throw new \InvalidArgumentException("Product {$id} not found");
+        }
+
+        $product->decreaseStock($quantity);
+        $this->productRepository->save($product);
+    }
 }

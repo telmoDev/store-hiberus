@@ -46,6 +46,8 @@ class CreateOrder
                 $quantity
             );
             $order->addItem($orderItem);
+
+            $this->productGateway->decreaseStock($productId, $quantity);
         }
         
         $this->orderRepository->save($order);
