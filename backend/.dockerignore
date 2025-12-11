@@ -1,0 +1,9 @@
+vendor/
+var/
+.git
+.gitignore
+.env.local
+.env.*.local
+tests/
+.phpunit.cache/
+README.md

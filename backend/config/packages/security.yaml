@@ -1,0 +1,64 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            id: App\Contexts\Auth\Infrastructure\Security\InMemoryUserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        
+        api_login:
+            pattern: ^/api/auth/login
+            stateless: true
+            # No security on login endpoint itself, or public access
+
+        api:
+            pattern: ^/api
+            stateless: true
+            access_token:
+                token_handler: App\Contexts\Auth\Infrastructure\Security\SimulatedAccessTokenHandler
+
+        main:
+            lazy: true
+            provider: app_user_provider
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api/auth/login, roles: PUBLIC_ACCESS }
+        # Products: Admin creates, Everyone (or Clients) reads?
+        # Requirement: "permita a un cliente autenticado... interactuar con catálogo"
+        # Implies Client needs to be auth to see catalog?
+        # Let's say: POST is ADMIN, GET is ROLE_USER (Client/Admin)
+        - { path: ^/api/products, methods: [POST], roles: ROLE_ADMIN }
+        - { path: ^/api/products, methods: [GET], roles: ROLE_CLIENT } # Or ROLE_USER
+        
+        # Orders: Client creates
+        - { path: ^/api/orders, roles: ROLE_CLIENT }
+        
+        # Payments: Client pays (Covered by ^/api/orders)
+        # - { path: ^/api/payments, roles: ROLE_CLIENT }
+
+when@test:
+    security:
+        password_hashers:
+            # Password hashers are resource-intensive by design to ensure security.
+            # In tests, it's safe to reduce their cost to improve performance.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon
