@@ -143,9 +143,14 @@ docker-compose up -d --build
 # 3. Esperar a que los servicios estén listos (30-60 segundos)
 docker-compose logs -f backend
 
-# 4. Acceder a la aplicación
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:8000
+# 4. Cargar datos de prueba (Productos):
+   ```bash
+   docker-compose exec backend php bin/console doctrine:fixtures:load --no-interaction
+   ```
+
+5. ¡Listo! Accede a:
+   - Frontend: [http://localhost:3000](http://localhost:3000)
+   - Backend API: [http://localhost:8000](http://localhost:8000)
 ```
 
 ### Verificación
