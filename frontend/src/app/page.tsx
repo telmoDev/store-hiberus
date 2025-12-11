@@ -19,7 +19,7 @@ export default function Home() {
     <AuthGuard>
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container py-8">
+        <main className="container py-8 mx-auto">
           <div className="mb-8">
             <h1 className="text-4xl font-bold tracking-tight">Catálogo de Productos</h1>
             <p className="text-muted-foreground mt-2">
