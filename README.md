@@ -588,10 +588,10 @@ docker-compose exec -T db psql -U postgres store < backup.sql
 
 ## 📞 Contacto
 
-**Desarrollador**: [Tu Nombre]  
-**Email**: [tu-email@example.com]  
-**LinkedIn**: [tu-linkedin]  
-**GitHub**: [tu-github]
+**Desarrollador**: Telmo Daniel Ramirez Lara  
+**Email**: telmodanielramirez@gmail.com  
+**LinkedIn**: https://www.linkedin.com/in/telmo-ramirez-lara-803b67180/  
+**GitHub**: https://github.com/telmoDev
 
 ---
 
