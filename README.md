@@ -369,7 +369,7 @@ OK (5 tests, 15 assertions)
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
-| **PHP** | 8.2 | Lenguaje base |
+| **PHP** | 8.3 | Lenguaje base |
 | **Symfony** | 7.4 | Framework web |
 | **Doctrine ORM** | 3.5 | Persistencia |
 | **PostgreSQL** | 16 | Base de datos |
