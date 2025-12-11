@@ -86,11 +86,11 @@ export function LoginForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Contraseña</Label>
                         <Input
                             id="password"
                             type="password"
-                            placeholder="Enter password"
+                            placeholder="Introduce tu contraseña"
                             {...register("password")}
                             disabled={isLoading}
                         />
