@@ -16,7 +16,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             user: null,
             token: null,
             isAuthenticated: false,
@@ -48,11 +48,6 @@ export const useAuthStore = create<AuthState>()(
             },
 
             logout: () => {
-                // Clear localStorage
-                if (typeof window !== "undefined") {
-                    localStorage.removeItem("auth_token");
-                    localStorage.removeItem("auth_user");
-                }
                 set({
                     user: null,
                     token: null,
@@ -62,25 +57,10 @@ export const useAuthStore = create<AuthState>()(
             },
 
             checkAuth: () => {
-                // Check if user is authenticated from localStorage
-                if (typeof window !== "undefined") {
-                    const token = localStorage.getItem("auth_token");
-                    const userStr = localStorage.getItem("auth_user");
-
-                    if (token && userStr) {
-                        try {
-                            const user = JSON.parse(userStr);
-                            set({
-                                user: { ...user, token },
-                                token,
-                                isAuthenticated: true,
-                            });
-                        } catch {
-                            // Invalid data, clear everything
-                            localStorage.removeItem("auth_token");
-                            localStorage.removeItem("auth_user");
-                        }
-                    }
+                // State is automatically rehydrated by persist middleware
+                const { token } = get();
+                if (token) {
+                    set({ isAuthenticated: true });
                 }
             },
         }),
