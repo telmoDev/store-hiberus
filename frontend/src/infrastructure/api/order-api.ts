@@ -18,6 +18,16 @@ export class OrderApiRepository implements IOrderRepository {
         const response = await httpClient.get<Order>(`/api/v1/orders/${orderId}`);
         return response.data;
     }
+
+    async getOrders(params: {
+        search?: string;
+        page?: number;
+        limit?: number;
+        sort?: string;
+    } = {}): Promise<Order[]> {
+        const response = await httpClient.get<Order[]>("/api/v1/orders", { params });
+        return response.data;
+    }
 }
 
 export const orderApi = new OrderApiRepository();

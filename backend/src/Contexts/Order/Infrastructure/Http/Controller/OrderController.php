@@ -17,8 +17,41 @@ class OrderController extends AbstractController
     public function __construct(
         private CreateOrder $createOrder,
         private GetOrder $getOrder,
+        private \App\Contexts\Order\Application\ListOrders $listOrders,
         private SerializerInterface $serializer
     ) {}
+
+    #[Route('', name: 'order_list', methods: ['GET'])]
+    public function list(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+             return $this->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $search = $request->query->get('search');
+        $page = $request->query->getInt('page', 1);
+        $limit = $request->query->getInt('limit', 10);
+        $sort = $request->query->get('sort');
+
+        $isAdmin = in_array('ROLE_ADMIN', $user->getRoles());
+
+        $orders = ($this->listOrders)(
+            $user->getUserIdentifier(),
+            $isAdmin,
+            $search,
+            $page,
+            $limit,
+            $sort
+        );
+
+        return new JsonResponse(
+            $this->serializer->serialize($orders, 'json', ['ignored_attributes' => ['order']]),
+            200,
+            [],
+            true
+        );
+    }
 
     #[Route('', name: 'order_create', methods: ['POST'])]
     public function create(Request $request): JsonResponse

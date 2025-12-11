@@ -18,6 +18,19 @@ export function useOrder(orderId: string) {
     });
 }
 
+// Hook to fetch list of orders
+export function useOrders(params: {
+    search?: string;
+    page?: number;
+    limit?: number;
+    sort?: string;
+} = {}) {
+    return useQuery({
+        queryKey: [...orderKeys.all, "list", params],
+        queryFn: () => orderApi.getOrders(params),
+    });
+}
+
 // Hook to create an order
 export function useCreateOrder() {
     const queryClient = useQueryClient();
