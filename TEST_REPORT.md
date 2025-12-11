@@ -15,10 +15,10 @@
 | Suite | Tests | Assertions | Estado |
 |-------|-------|------------|--------|
 | Auth Controller | 2 | 2 | ✅ PASSED |
-| Order Controller | 1 | 2 | ✅ PASSED |
+| Order Controller | 2 | 9 | ✅ PASSED |
 | Payment Controller | 1 | 2 | ✅ PASSED |
 | Product Controller | 3 | 5 | ✅ PASSED |
-| **BATERÍA TOTAL** | **7** | **11** | **✅ 100% PASS** |
+| **BATERÍA TOTAL** | **8** | **18** | **✅ 100% PASS** |
 
 ## 📝 Detalle de Ejecución
 
@@ -34,6 +34,7 @@ Auth Controller (App\Tests\Contexts\Auth\Infrastructure\Http\Controller\AuthCont
 
 Order Controller (App\Tests\Contexts\Order\Infrastructure\Http\Controller\OrderController)
  ✔ Create order
+ ✔ List orders
 
 Payment Controller (App\Tests\Contexts\Payment\Infrastructure\Http\Controller\PaymentController)
  ✔ Checkout
@@ -43,7 +44,7 @@ Product Controller (App\Tests\Contexts\Product\Infrastructure\Http\Controller\Pr
  ✔ Create product without admin role
  ✔ List products
 
-OK (7 tests, 11 assertions)
+OK (8 tests, 18 assertions)
 ```
 
 
