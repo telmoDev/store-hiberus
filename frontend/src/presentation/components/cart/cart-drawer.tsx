@@ -65,7 +65,7 @@ export function CartDrawer() {
 
     if (items.length === 0) {
         return (
-            <div className="container max-w-4xl py-8">
+            <div className="container max-w-4xl py-8 mx-auto">
                 <Card>
                     <CardHeader>
                         <CardTitle>Carrito de Compras</CardTitle>
